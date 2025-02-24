@@ -1,0 +1,121 @@
+/* Общие стили */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f4f7f9, #dbe9f4);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Центрирование контента */
+  #auth, #dashboard {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    width: 420px; /* Шире и удобнее */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  #auth:hover, #dashboard:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Заголовки */
+  h1, h2 {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  /* Поля ввода */
+  input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  input:focus, select:focus {
+    border-color: #3498db;
+    box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.4);
+    outline: none;
+  }
+  
+  /* Кнопки */
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+  
+  /* Цвета кнопок */
+  #login-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+  }
+  
+  #register-btn {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+  }
+  
+  button[onclick="logout()"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+  }
+  
+  /* Список транзакций */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background: #ffffff;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  
+  ul li:hover {
+    transform: translateX(5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Кнопка удаления */
+  ul li button {
+    background: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: 0.3s;
+  }
+  
+  ul li button:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+  }
+  

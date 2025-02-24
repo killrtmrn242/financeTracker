@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Финансовый Трекер</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="auth">
+    <h2 id="auth-title">Вход</h2>
+  
+    <input type="text" id="username" placeholder="Имя пользователя">
+    <input type="password" id="password" placeholder="Пароль">
+    
+    <div id="register-fields" style="display: none;">
+      <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
+    </div>
+  
+    <button onclick="login()" id="login-btn">Войти</button>
+    <button id="register-btn" onclick="toggleRegister()">Регистрация</button>
+  </div>
+
+  <div id="dashboard" style="display: none;">
+    <h1>Ваши транзакции</h1>
+    <p>Пользователь: <span id="profile-username"></span></p>
+    
+    <!-- Блок для смены логина -->
+    <div id="update-username-section">
+      <button id="toggle-update-username-btn" onclick="toggleUpdateUsername()">Сменить логин</button>
+      <div id="update-username-form" style="display: none; margin-top: 10px;">
+        <input type="text" id="new-username" placeholder="Введите новый логин">
+        <button onclick="updateUserName()">Подтвердить смену логина</button>
+      </div>
+    </div>
+
+    <!-- Блок для отображения баланса -->
+    <div id="summary">
+      <h3><span id="balance">0</span> руб.</h3>
+      <p><span id="total-income">0</span> руб.</p>
+      <p><span id="total-expense">0</span> руб.</p>
+    </div>
+  
+    <ul id="transactions"></ul>
+  
+    <h2>Добавить транзакцию</h2>
+    <input type="number" id="amount" placeholder="Сумма">
+    <select id="type">
+        <option value="income">Доход</option>
+        <option value="expense">Расход</option>
+    </select>
+    <input type="text" id="category" placeholder="Категория">
+    <button onclick="addTransaction()">Добавить</button>
+  
+    <button onclick="logout()">Выйти</button>
+  </div>
+  
+
+  <script src="script.js"></script>
+</body>
+</html>
