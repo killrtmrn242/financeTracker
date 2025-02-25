@@ -2,8 +2,9 @@ require('dotenv').config(); // Загружаем переменные окру�
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
-// Импорт маршрутов
+// Импорт маршрутов API
 const authRoutes = require('./routes/authRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const userRoutes = require("./routes/userRoutes");
@@ -15,18 +16,31 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Логируем входящие запросы (для отладки)
+// Логирование входящих запросов (для отладки)
 app.use((req, res, next) => {
     console.log(`🔥 Запрос: ${req.method} ${req.originalUrl}`);
     next();
 });
 
-// Маршруты API
+// Маршруты API (все маршруты с префиксом /api будут обрабатываться здесь)
 app.use("/api/users", userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 
-// Подключение к MongoDB
+// Раздача статических файлов фронтенда (сборка должна быть в папке "frontend")
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+// Для всех GET-запросов, не начинающихся с /api, отдаем index.html (поддержка SPA)
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// Глобальный обработчик для остальных запросов (например, для POST, PUT, DELETE), если маршрут не найден
+app.use((req, res) => {
+    res.status(404).json({ error: "Маршрут не найден" });
+});
+
+// Подключение к MongoDB и запуск сервера
 const connectDB = async () => {
     try {
         console.log("🔍 Подключение к MongoDB...");
@@ -36,7 +50,6 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-
         console.log('✅ MongoDB подключен');
 
         // Запускаем сервер только после успешного подключения к базе
@@ -51,10 +64,4 @@ const connectDB = async () => {
     }
 };
 
-// Вызываем подключение к MongoDB
 connectDB();
-
-// Обработчик ошибок 404 (если маршрут не найден)
-app.use((req, res) => {
-    res.status(404).json({ error: "Маршрут не найден" });
-});
